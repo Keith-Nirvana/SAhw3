@@ -8,6 +8,7 @@ public class Record {
     private String readerId;
     private Date borrowDate;
     private Date returnDate;
+    private double payment;
 
     public Record() {
     }
