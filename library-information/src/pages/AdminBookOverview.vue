@@ -2,7 +2,6 @@
   <div>
     <navigation/>
     <book-list :bookList="bookList" :isEdit="isEdit" />
-
   </div>
 
 </template>
@@ -16,9 +15,9 @@
     data() {
       return {
         isEdit: true,
-        bookList: [{bookName: '寒假作业', bookId: 'Nj20394', isBorrowed: true, category: '文学'},
-          {bookName: '暑假作业', bookId: 'N990394', isBorrowed: false, category: '文学'},
-          {bookName: '课时作业', bookId: 'Nj20394', isBorrowed: false, category: '文学'}],
+        bookList: [{bookName: '寒假作业', bookId: 'Nj20394', isBorrowed: true, category: 2},
+          {bookName: '暑假作业', bookId: 'N990394', isBorrowed: false, category: 1},
+          {bookName: '课时作业', bookId: 'Nj20394', isBorrowed: false, category: 3}],
       }
     },
   }

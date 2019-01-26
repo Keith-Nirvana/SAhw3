@@ -4,7 +4,12 @@
       <el-card shadow="never" style="margin-top: 10px" v-for="user in userList">
         <el-row style="text-align: left; color: #3e86ff; font-weight: bold; font-size: 25px">{{user.userName}}</el-row>
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{user.userId}}</el-row>
-        <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{user.type}}</el-row>
+        <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
+          <el-col :span="12">{{getType(user.type)}}</el-col>
+          <el-col :span="12" style="text-align: right" v-show="user.type == 'OFFICE'">
+            <el-button type="primary" icon="el-icon-edit" size="mini" plain @click="grant(user.permission)">授权</el-button>
+          </el-col>
+        </el-row>
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{user.department}}</el-row>
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
           <el-col :span="12">{{user.email}}</el-col>
@@ -20,9 +25,6 @@
         <el-form-item label="用户名" label-width="90px">
           <el-input v-model="form.userName" autocomplete="off"/>
         </el-form-item>
-        <el-form-item label="用户账号" label-width="90px">
-          <el-input v-model="form.userId" autocomplete="off"/>
-        </el-form-item>
         <el-form-item label="邮箱" label-width="90px">
           <el-input v-model="form.email" autocomplete="off"/>
         </el-form-item>
@@ -31,6 +33,7 @@
             <el-option label="教师" value="TEACHER"/>
             <el-option label="在校生" value="UNDERGRADUATE"/>
             <el-option label="毕业生" value="GRADUATE"/>
+            <el-option label="学工处" value="OFFICE"/>
           </el-select>
         </el-form-item>
         <el-form-item label="学院/部门" label-width="90px">
@@ -43,8 +46,22 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button @click="cancelModify">取 消</el-button>
         <el-button type="primary" @click="confirmModify">确 定</el-button>
+      </div>
+    </el-dialog>
+
+    <el-dialog title="授权" :visible.sync="grantFormVisible">
+      <el-form :model="grantForm" label-position="left">
+        <el-checkbox-group v-model="grantForm.type">
+          <el-checkbox label="编辑用户"/>
+          <el-checkbox label="创建用户"/>
+          <el-checkbox label="编辑图书"/>
+        </el-checkbox-group>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="cancelGrant">取 消</el-button>
+        <el-button type="primary" @click="confirmGrant">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -57,7 +74,12 @@
     data() {
       return {
         dialogFormVisible: false,
-        form: {}
+        grantFormVisible: false,
+        form: {},
+        tempForm: {},
+        grantForm: {
+          type:[]
+        }
       }
     },
     props: {
@@ -67,17 +89,67 @@
 
     },
     methods: {
+      getType: function(type){
+        if(type==='TEACHER')
+          return '教师'
+        if(type==='UNDERGRADUATE')
+          return '在校生'
+        if(type==='GRADUATE')
+          return '毕业生'
+        if(type==='OFFICE')
+          return '学工处'
+      },
       modifyUserInfo: function(user){
         console.log(user)
         this.form = user
+        this.tempForm = user
         this.dialogFormVisible = true
-        // this.$router.push('/home')
       },
       confirmModify: function(){
         this.dialogFormVisible = false
         console.log(this.form)
         // TODO 修改信息
-      }
+      },
+      cancelModify: function(){
+        this.dialogFormVisible = false
+        this.form = this.tempForm
+        // TODO 刷新列表
+      },
+      grant: function(permission){
+        this.grantFormVisible = true
+
+        this.grantForm.type = []
+        if(permission.search("2") != -1)
+          this.grantForm.type.push("编辑用户")
+
+        if(permission.search("3") != -1)
+          this.grantForm.type.push("创建用户")
+
+        if(permission.search("4") != -1)
+          this.grantForm.type.push("编辑图书")
+      },
+      confirmGrant: function(){
+        this.grantFormVisible = false
+        console.log(this.grantForm.type)
+
+        let permission = ""
+
+        if(this.grantForm.type.includes("编辑用户"))
+          permission = "2"
+
+        if(this.grantForm.type.includes("创建用户"))
+          permission = permission + "3"
+
+        if(this.grantForm.type.includes("编辑图书"))
+          permission = permission + "4"
+
+        console.log(permission)
+        // TODO 授权,之后重新获取列表
+      },
+      cancelGrant: function(){
+        this.grantFormVisible = false
+      },
+
     }
 
   }

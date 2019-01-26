@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import SignInPage from '../pages/SignIn'
+import AdminStatisticPage from '../pages/AdminStatistic'
 import AdminBookOverviewPage from '../pages/AdminBookOverview'
 import UserBookOverviewPage from '../pages/UserBookOverview'
 import UserOverviewPage from '../pages/AdminUserOverview'
@@ -47,6 +48,11 @@ export default new Router({
       path: '/user/reader',
       name: 'UserOnlineReaderPage',
       component: UserOnlineReaderPage
+    },
+    {
+      path: '/admin/statistic',
+      name: 'AdminStatisticPage',
+      component: AdminStatisticPage
     }
   ]
 })
