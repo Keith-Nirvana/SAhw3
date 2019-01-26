@@ -1,4 +1,4 @@
-package nju.library.daoTest;
+package nju.library.daoImpl;
 
 import nju.library.dao.DaoHelper;
 import nju.library.daoImpl.DaoHelperImpl;
