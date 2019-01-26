@@ -11,5 +11,7 @@ public interface RecordDao {
 
     public List<Record> getAllRecord();
 
+    public List<Record> getUnfinishedRecordByUserId(String userId);
+
     public Record getUnfinishedRecord(String bookId);
 }

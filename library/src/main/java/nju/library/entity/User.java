@@ -2,18 +2,30 @@ package nju.library.entity;
 
 
 public class User {
-    private String userId;
-    private String userName;
+    protected String userId;
+
+    protected String password;
+    protected String userName;
     // 学院
-    private String department;
-    private String email;
+    protected String department;
+    protected String email;
     // 用户类型: teacher undergraduate graduate
-    private String type;
+    protected String type;
     // 用户权限
-    private String permission;
+    protected String permission;
 
     public User(String userId, String userName, String department, String email, String type, String permission) {
         this.userId = userId;
+        this.userName = userName;
+        this.department = department;
+        this.email = email;
+        this.type = type;
+        this.permission = permission;
+    }
+
+    public User(String userId, String password, String userName, String department, String email, String type, String permission) {
+        this.userId = userId;
+        this.password = password;
         this.userName = userName;
         this.department = department;
         this.email = email;
@@ -34,6 +46,10 @@ public class User {
 
     public String getUserId() {
         return userId;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     public String getUserName() {

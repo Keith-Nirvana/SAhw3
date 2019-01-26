@@ -51,4 +51,12 @@ public class Record {
     public Date getBorrowDate() {
         return borrowDate;
     }
+
+    public Date getReturnDate() {
+        return returnDate;
+    }
+
+    public double getPayment() {
+        return payment;
+    }
 }

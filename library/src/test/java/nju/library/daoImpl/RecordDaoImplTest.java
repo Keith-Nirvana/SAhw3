@@ -14,9 +14,16 @@ public class RecordDaoImplTest {
 
     @Test
     public void modifyRecord() {
+        new RecordDaoImpl().modifyRecord("1548508324848", 12.5);
     }
 
     @Test
     public void getAllRecord() {
+        new RecordDaoImpl().getAllRecord().forEach(item -> System.out.println(item.getRecordId()));
+    }
+
+    @Test
+    public void getUnfinishedRecordByUserId(){
+        new RecordDaoImpl().getUnfinishedRecordByUserId("161250031").forEach(item -> System.out.println(item.getRecordId()));
     }
 }
