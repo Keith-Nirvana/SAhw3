@@ -7,6 +7,16 @@ public class Teacher extends User {
 
     private BorrowStrategy borrowStrategy = new TeacherBorrowStrategy();
 
+    public Teacher(String userId, String userName, String department, String email, String type, String permission) {
+        super(userId, userName, department, email, type, permission);
+        this.borrowStrategy = new TeacherBorrowStrategy();
+    }
+
+    public Teacher(User user){
+        super(user.getUserId(), user.getUserName(), user.getDepartment(), user.getEmail(), user.getType(), user.getPermission());
+        this.borrowStrategy =  new TeacherBorrowStrategy();
+    }
+
     public void setBorrowStrategy(BorrowStrategy borrowStrategy) {
         this.borrowStrategy = borrowStrategy;
     }

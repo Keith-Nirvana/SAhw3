@@ -4,7 +4,17 @@ import nju.library.service.BorrowStrategy;
 import nju.library.serviceImpl.borrowServiceImpl.UndergraduateBorrowStrategy;
 
 public class UnderGraduate extends User {
-    private BorrowStrategy borrowStrategy = new UndergraduateBorrowStrategy();
+    private BorrowStrategy borrowStrategy;
+
+    public UnderGraduate(String userId, String userName, String department, String email, String type, String permission) {
+        super(userId, userName, department, email, type, permission);
+        borrowStrategy = new UndergraduateBorrowStrategy();
+    }
+
+    public UnderGraduate(User user){
+        super(user.getUserId(), user.getUserName(), user.getDepartment(), user.getEmail(), user.getType(), user.getPermission());
+        borrowStrategy = new UndergraduateBorrowStrategy();
+    }
 
     public void setBorrowStrategy(BorrowStrategy borrowStrategy) {
         this.borrowStrategy = borrowStrategy;

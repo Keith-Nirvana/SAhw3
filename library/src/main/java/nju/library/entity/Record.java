@@ -20,6 +20,15 @@ public class Record {
         this.borrowDate = new Date();
     }
 
+    public Record(String recordId, String bookId, String readerId, Date borrowDate, Date returnDate, double payment) {
+        this.recordId = recordId;
+        this.bookId = bookId;
+        this.readerId = readerId;
+        this.borrowDate = borrowDate;
+        this.returnDate = returnDate;
+        this.payment = payment;
+    }
+
     public String getRecordId() {
         return recordId;
     }
