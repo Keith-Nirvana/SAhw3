@@ -36,7 +36,7 @@
     methods:{
       signIn: function(){
         // TODO,验证登陆
-        this.$router.push('/book')
+        this.$router.push('/user/book')
       }
     }
   }

@@ -11,7 +11,7 @@
   const navigation = () => import('../components/Navigation')
   const bookList = () => import('../components/BookList.vue')
   export default {
-    name: "book-overview",
+    name: "admin-book-overview",
     components:{bookList, navigation},
     data() {
       return {

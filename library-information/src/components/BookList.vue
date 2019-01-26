@@ -84,7 +84,11 @@
       },
       read: function(bookId, bookName){
         console.log(bookId)
-        this.$router.push({name: 'OnlineReaderPage', params: { bookName: bookName, bookId: bookId}})
+        if(this.isEdit)
+          this.$router.push({name: 'AdminOnlineReaderPage', params: { bookName: bookName, bookId: bookId}})
+        else
+          this.$router.push({name: 'UserOnlineReaderPage', params: { bookName: bookName, bookId: bookId}})
+
       }
     }
 

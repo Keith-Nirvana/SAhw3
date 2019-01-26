@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigation/>
+    <user-navigation/>
     <book-list :bookList="bookList" :isEdit="isEdit" />
 
   </div>
@@ -8,11 +8,11 @@
 </template>
 
 <script>
-  const navigation = () => import('../components/Navigation')
+  const userNavigation = () => import('../components/UserNavigation')
   const bookList = () => import('../components/BookList.vue')
   export default {
-    name: "book-overview",
-    components:{bookList, navigation},
+    name: "user-book-overview",
+    components:{bookList, userNavigation},
     data() {
       return {
         isEdit: false,
