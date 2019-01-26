@@ -2,9 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import SignInPage from '../pages/SignIn'
-import BookOverviewPage from '../pages/BookOverview'
+import AdminBookOverviewPage from '../pages/AdminBookOverview'
+import UserBookOverviewPage from '../pages/UserBookOverview'
 import UserOverviewPage from '../pages/UserOverview'
-
+import OnlineReaderPage from '../pages/BookOnlineReader'
 
 Vue.use(Router)
 
@@ -16,14 +17,24 @@ export default new Router({
       component: SignInPage
     },
     {
+      path: '/book/edit',
+      name: 'AdminBookOverviewPage',
+      component: AdminBookOverviewPage
+    },
+    {
       path: '/book',
-      name: 'BookOverviewPage',
-      component: BookOverviewPage
+      name: 'UserBookOverviewPage',
+      component: UserBookOverviewPage
     },
     {
       path: '/user',
       name: 'UserOverviewPage',
       component: UserOverviewPage
     },
+    {
+      path: '/reader',
+      name: 'OnlineReaderPage',
+      component: OnlineReaderPage
+    }
   ]
 })

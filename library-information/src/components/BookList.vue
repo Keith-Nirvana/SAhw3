@@ -7,7 +7,7 @@
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
           <el-col :span="12">索书号：{{book.bookId}}</el-col>
           <el-col :span="12" style="text-align: right">
-            <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="read(book.bookId)">在线阅读</el-button>
+            <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="read(book.bookId, book.bookName)">在线阅读</el-button>
             <el-button type="primary" :icon="icon" size="mini" :disabled=book.isBorrowed&&isEdit @click="modifyOrBorrow(book)">{{text}}</el-button>
           </el-col>
         </el-row>
@@ -82,8 +82,9 @@
       borrow: function(bookId){
         console.log(bookId)
       },
-      read: function(bookId){
+      read: function(bookId, bookName){
         console.log(bookId)
+        this.$router.push({name: 'OnlineReaderPage', params: { bookName: bookName, bookId: bookId}})
       }
     }
 

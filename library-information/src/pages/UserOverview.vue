@@ -1,13 +1,17 @@
 <template>
-  <user-list :userList="userList"/>
-
+  <div>
+    <navigation/>
+    <user-list :userList="userList"/>
+  </div>
 </template>
 
 <script>
   const userList = () => import('../components/UserList.vue')
+  const navigation = () => import('../components/Navigation')
+
   export default {
     name: "user-overview",
-    components:{userList},
+    components:{userList, navigation},
     data() {
       return {
         userList: [{userName: 'kiki', userId: '161250031', type: 'UNDERGRADUATE', email: '161250031@smail.nju.edu.cn', department: '软件学院'},

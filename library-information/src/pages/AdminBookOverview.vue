@@ -1,13 +1,18 @@
 <template>
-  <book-list :bookList="bookList" :isEdit="isEdit" />
+  <div>
+    <navigation/>
+    <book-list :bookList="bookList" :isEdit="isEdit" />
+
+  </div>
 
 </template>
 
 <script>
+  const navigation = () => import('../components/Navigation')
   const bookList = () => import('../components/BookList.vue')
   export default {
     name: "book-overview",
-    components:{bookList},
+    components:{bookList, navigation},
     data() {
       return {
         isEdit: true,
