@@ -117,7 +117,7 @@ public class UserDaoImpl implements UserDao {
 
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, permission);
-            pst.setString(2. userId);
+            pst.setString(2, userId);
 
             pst.executeUpdate();
         } catch (SQLException e) {
