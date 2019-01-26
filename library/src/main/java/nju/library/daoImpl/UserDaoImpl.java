@@ -89,24 +89,42 @@ public class UserDaoImpl implements UserDao {
             String sql = "INSERT INTO library_information.user(userId, passwd, userName, department" +
                     ", email, type, permission) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, record.getRecordId());
-            ps.setString(2, record.getBookId());
-            ps.setString(3, record.getReaderId());
-            ps.setTimestamp(4, new Timestamp(record.getBorrowDate().getTime()));
+
+            ps.setString(1, user.getUserId());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getUserName());
+            ps.setString(4, user.getDepartment());
+            ps.setString(5, user.getEmail());
+            ps.setString(6, user.getType());
+            ps.setString(7, user.getPermission());
 
             ps.executeUpdate();
-
-            conn.close();
-
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } finally {
+            daoHelper.closeConnection(conn);
         }
+
+        return true;
     }
 
     @Override
     public boolean grantPermission(String userId, String permission) {
-        return false;
+        Connection conn = daoHelper.getConnection();
+        try {
+            String sql = "UPDATE library_information.user SET permission= ? WHERE userId = ?";
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, permission);
+            pst.setString(2. userId);
+
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
     }
 }
