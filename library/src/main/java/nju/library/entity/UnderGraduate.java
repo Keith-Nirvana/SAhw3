@@ -6,12 +6,12 @@ import nju.library.serviceImpl.borrowServiceImpl.UndergraduateBorrowStrategy;
 public class UnderGraduate extends User {
     private BorrowStrategy borrowStrategy;
 
-    public UnderGraduate(String userId, String userName, String department, String email, String type, String permission) {
-        super(userId, userName, department, email, type, permission);
+    public UnderGraduate(String userId, String password, String userName, String department, String email, String type, String permission) {
+        super(userId, password, userName, department, email, type, permission);
         borrowStrategy = new UndergraduateBorrowStrategy();
     }
 
-    public UnderGraduate(User user){
+    public UnderGraduate(User user) {
         super(user.getUserId(), user.getUserName(), user.getDepartment(), user.getEmail(), user.getType(), user.getPermission());
         borrowStrategy = new UndergraduateBorrowStrategy();
     }
@@ -20,11 +20,11 @@ public class UnderGraduate extends User {
         this.borrowStrategy = borrowStrategy;
     }
 
-    public boolean borrowBook(String bookId){
+    public boolean borrowBook(String bookId) {
         return borrowStrategy.borrowBook(super.getUserId(), bookId);
     }
 
-    public boolean retutnBook(String bookId){
+    public boolean retutnBook(String bookId) {
         return borrowStrategy.returnBook(super.getUserId(), bookId);
     }
 }
