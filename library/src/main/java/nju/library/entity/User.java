@@ -1,6 +1,5 @@
 package nju.library.entity;
 
-import nju.library.service.BorrowStrategy;
 
 public class User {
     private String userId;
@@ -13,16 +12,6 @@ public class User {
     // 用户权限
     private String permission;
 
-    private BorrowStrategy borrowStrategy;
-
-    public void setBorrowStrategy(BorrowStrategy borrowStrategy) {
-        this.borrowStrategy = borrowStrategy;
-    }
-
-    public boolean borrowBook(String bookId){
-        return borrowStrategy.borrow(userId, bookId);
-    }
-
     public String getPermission() {
         return permission;
     }
@@ -31,4 +20,23 @@ public class User {
         this.permission = permission;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getType() {
+        return type;
+    }
 }
