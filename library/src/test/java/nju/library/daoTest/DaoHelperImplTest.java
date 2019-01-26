@@ -28,4 +28,9 @@ public class DaoHelperImplTest {
         System.out.println(name);
     }
 
+    @Test
+    public void testInitialize(){
+        DaoHelper daoHelper = new DaoHelperImpl();
+    }
+
 }

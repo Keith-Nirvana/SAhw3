@@ -2,13 +2,31 @@ package nju.library.daoImpl;
 
 import nju.library.dao.DaoHelper;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
+import java.util.Properties;
 
 public class DaoHelperImpl implements DaoHelper {
-    private final static String driver = "com.mysql.cj.jdbc.Driver";    //mysql8以下版本去掉.cj
-    private final static String url = "jdbc:mysql://localhost:3306/library_information?useSSL=false&serverTimezone=Asia/Shanghai";  //mysql8以下serverTimeZone可去掉
-    private final static String user = "root";
-    private final static String password = "";  //密码自己填
+    private static String driver = "";    //mysql8以下版本去掉.cj
+    private static String url = "";  //mysql8以下serverTimeZone可去掉
+    private static String user = "";
+    private static String password = "";  //密码自己填
+
+    static {
+        InputStream inputStream = DaoHelper.class.getClassLoader().getResourceAsStream("jdbc.properties");
+        try {
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
+            driver = properties.getProperty("className");
+            url = properties.getProperty("url");
+            user = properties.getProperty("user");
+            password = properties.getProperty("password");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public DaoHelperImpl(){
         try {
