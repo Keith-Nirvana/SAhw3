@@ -29,6 +29,13 @@ public class Record {
         this.payment = payment;
     }
 
+    public Record(String recordId, String bookId, String readerId, Date borrowDate) {
+        this.recordId = recordId;
+        this.bookId = bookId;
+        this.readerId = readerId;
+        this.borrowDate = borrowDate;
+    }
+
     public String getRecordId() {
         return recordId;
     }
