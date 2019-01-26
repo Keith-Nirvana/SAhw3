@@ -22,4 +22,13 @@ public class User {
     public boolean borrowBook(String bookId){
         return borrowStrategy.borrow(userId, bookId);
     }
+
+    public String getPermission() {
+        return permission;
+    }
+
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
+
 }
