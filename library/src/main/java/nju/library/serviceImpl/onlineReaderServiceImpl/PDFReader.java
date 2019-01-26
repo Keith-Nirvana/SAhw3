@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class PDFReader extends OnlineReader {
+    private String path = System.getProperty("user.dir");
     @Override
     public String read(String bookName) {
         // 根据文件名转换成多张图片，返回图片的html表示
@@ -18,9 +19,9 @@ public class PDFReader extends OnlineReader {
         String html = "<body>";
 
         for (int i = 0; i < pageNumber; i++){
-            html = html + "<div style=\"width:100%;height:auto\">\n" +
-                    "    <img src=\"" + System.getProperty("user.dir") + "/src/main/resources/bookPictures/" + bookName + i + ".png" +"\"/>\n" +
-                    "</div>";
+            html = html + "<div>\n" +
+                    "    <img src=\""+ "./../static/bookImages/" + bookName + i + ".png" +"\" style=\"width:100%;" +
+                    "height:auto\" />\n </div>";
         }
 
         return html + "</body>";
@@ -30,7 +31,7 @@ public class PDFReader extends OnlineReader {
         PDDocument doc = null;
         int pageNumber = 0;
         try {
-            doc = PDDocument.load(new File(System.getProperty("user.dir") + "/src/main/resources/books/" +
+            doc = PDDocument.load(new File(path + "/src/main/resources/books/" +
                     bookName + ".pdf"));
 
             pageNumber = doc.getNumberOfPages();
@@ -38,8 +39,8 @@ public class PDFReader extends OnlineReader {
 
             for (int i = 0; i < pageNumber; i++) {
                 BufferedImage image = renderer.renderImageWithDPI(i, 296);
-                ImageIO.write(image, "PNG", new File(System.getProperty("user.dir") +
-                        "/src/main/resources/bookPictures/" + bookName + i + ".png"));
+                ImageIO.write(image, "PNG", new File(path.substring(0, path.length()-8) +
+                        "/library-information/static/bookImages/" + bookName + i + ".png"));
             }
             doc.close();
         } catch (IOException e) {
