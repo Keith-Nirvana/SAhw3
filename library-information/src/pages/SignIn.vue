@@ -35,7 +35,7 @@
     },
     methods:{
       signIn: function(){
-        // TODO,验证登陆
+        // TODO,验证登陆,用户权限
         this.$router.push('/user/book')
       }
     }
