@@ -10,6 +10,8 @@
 
 1. 使用创建library_information数据库，执行``bash.sql``脚本导入数据
 
+   【注意】数据库默认使用root账号，密码123456
+
    ```shell
    mysql -u root -p
    [输入密码]
@@ -27,7 +29,7 @@
    mvn spring-boot:run
    ```
 
-3. 执行``runFrontend.sh``脚本或者执行
+4. 执行``runFrontend.sh``脚本或者执行
 
    ```shell
    cd library-information
