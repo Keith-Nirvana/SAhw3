@@ -67,4 +67,11 @@ public class User {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return this.userId + ", " + this.password + ", " + this.userName
+                + ", " + this.department + ", " + this.email + ", "+ this.type
+                + ", " + this.permission;
+    }
 }
