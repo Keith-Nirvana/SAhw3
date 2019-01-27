@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -39,9 +41,9 @@ public class StatisticController {
             jsonObject.put("recordId", record.getRecordId());
             jsonObject.put("bookId", record.getBookId());
             jsonObject.put("readerId", record.getReaderId());
-            jsonObject.put("borrowDate", record.getBorrowDate());
+            jsonObject.put("borrowDate", DateFormatHandler(record.getBorrowDate()));
             if (record.getReturnDate() != null)
-                jsonObject.put("returnDate", record.getReturnDate());
+                jsonObject.put("returnDate", DateFormatHandler(record.getReturnDate()));
             else
                 jsonObject.put("returnDate", "");
 
@@ -70,9 +72,9 @@ public class StatisticController {
             item.put("recordId", record.getRecordId());
             item.put("bookId", record.getBookId());
             item.put("readerId", record.getReaderId());
-            item.put("borrowDate", record.getBorrowDate());
+            item.put("borrowDate", DateFormatHandler(record.getBorrowDate()));
             if (record.getReturnDate() != null)
-                item.put("returnDate", record.getReturnDate());
+                item.put("returnDate", DateFormatHandler(record.getReturnDate()));
             else
                 item.put("returnDate", "");
             item.put("payment", record.getPayment());
@@ -83,5 +85,10 @@ public class StatisticController {
 
         result.put("penaltyList", jsonArray);
         return result.toJSONString();
+    }
+
+    private String DateFormatHandler(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
     }
 }
