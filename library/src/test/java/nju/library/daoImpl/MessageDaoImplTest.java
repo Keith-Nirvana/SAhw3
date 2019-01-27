@@ -17,7 +17,7 @@ public class MessageDaoImplTest {
 
     @Test
     public void getUnReadMessageByUserId() {
-        messageDao.getUnReadMessageByUserId("161250031").forEach(item -> System.out.println(item.getUserId()));
+        messageDao.getUnReadMessageByUserId("AD2937589").forEach(item -> System.out.println(item.getUserId()+item.getMessage()));
     }
 
     @Test

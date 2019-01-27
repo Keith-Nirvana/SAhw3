@@ -25,7 +25,7 @@ public class MessageDaoImpl implements MessageDao {
         ResultSet rs = null;
 
         try {
-            String sql = "SELECT * FROM library_information.message";
+            String sql = "SELECT * FROM library_information.message WHERE userId='" + userId + "' AND isRead=0";
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
