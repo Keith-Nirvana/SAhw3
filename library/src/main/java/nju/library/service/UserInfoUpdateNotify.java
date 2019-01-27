@@ -9,5 +9,5 @@ public interface UserInfoUpdateNotify {
     public void del(Administrator admin);
 
     /*通知所有的观察者*/
-    public void notifyObservers();
+    public void notifyObservers(String message);
 }

@@ -3,7 +3,9 @@ package nju.library.serviceImpl.userInfoUpdateNotifyServiceImpl;
 import nju.library.entity.Administrator;
 import nju.library.service.UserInfoUpdateNotify;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SubjectAdmin implements UserInfoUpdateNotify{
@@ -24,9 +26,19 @@ public class SubjectAdmin implements UserInfoUpdateNotify{
     }
 
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(String message) {
+//        System.out.println(message);
+//        System.out.println("admins size is " + registerAdmin.size());
+
+        String messageId = generateMessageId();
         for (Administrator admin: registerAdmin){
-            admin.receiveUpdateInfo();
+            admin.receiveUpdateInfo(messageId, message);
         }
+    }
+
+    private String generateMessageId(){
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(date);
     }
 }

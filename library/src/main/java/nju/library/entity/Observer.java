@@ -1,5 +1,5 @@
 package nju.library.entity;
 
 public interface Observer {
-    public boolean receiveUpdateInfo();
+    public boolean receiveUpdateInfo(String messageId, String message);
 }

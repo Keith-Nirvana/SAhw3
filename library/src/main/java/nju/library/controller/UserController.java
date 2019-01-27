@@ -24,7 +24,6 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/allUser", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
     public String getAllUser(){
-        // TODO
         JSONArray jsonArray = new JSONArray();
 
         List<User> users = userService.getAllUsers();
@@ -49,9 +48,15 @@ public class UserController {
         String userId = jsonParam.getString("userId");
         System.out.println(userId);
 
-        // TODO
+        User user = userService.getUserById(userId);
 
         JSONObject result = new JSONObject();
+        result.put("userId", user.getUserId());
+        result.put("userName", user.getUserName());
+        result.put("department", user.getDepartment());
+        result.put("email", user.getEmail());
+        result.put("type", user.getType());
+        result.put("permission", user.getPermission());
 
         return result.toJSONString();
     }
@@ -59,42 +64,50 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/addUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String createUser(@RequestBody JSONObject jsonParam){
-//        String userId = jsonParam.getString("userId");
-//        System.out.println(userId);
+        String userId = jsonParam.getString("userId");
+        String password = jsonParam.getString("password");
+        String userName = jsonParam.getString("userName");
+        String department = jsonParam.getString("department");
+        String email = jsonParam.getString("email");
+        String type = jsonParam.getString("type");
 
-        // TODO
+        boolean result = userService.createUser(userId, password, userName, department, email, type);
 
-        JSONObject result = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("res", result);
 
-        return result.toJSONString();
+        return jsonObject.toJSONString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/modifyUser", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String modifyUser(@RequestBody JSONObject jsonParam){
-//        String userId = jsonParam.getString("userId");
-//        System.out.println(userId);
+        String userId = jsonParam.getString("userId");
+        String userName = jsonParam.getString("userName");
+        String department = jsonParam.getString("department");
+        String email = jsonParam.getString("email");
+        String type = jsonParam.getString("type");
 
-        // TODO
+        boolean result = userService.modifyUser(userId, userName, department, email, type);
 
-        JSONObject result = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("res", result);
 
-        return result.toJSONString();
+        return jsonObject.toJSONString();
     }
 
     @ResponseBody
     @RequestMapping(value = "/grant", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String grantPermission(@RequestBody JSONObject jsonParam){
         String userId = jsonParam.getString("userId");
-        System.out.println(userId);
-
         String permission = jsonParam.getString("perimission");
-        System.out.println(permission);
 
         // TODO
+        boolean result = userService.grantPermission(userId, permission);
 
-        JSONObject result = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("res", result);
 
-        return result.toJSONString();
+        return jsonObject.toJSONString();
     }
 }
