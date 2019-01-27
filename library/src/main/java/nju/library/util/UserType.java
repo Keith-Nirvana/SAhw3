@@ -36,11 +36,11 @@ public class UserType {
 
     public static int getMaxBorrowDay(String type){
         if(type.equals(TEACHER))
-            return 180;
+            return 9;
         if(type.equals(GRADUATE))
-            return 30;
+            return 3;
         if(type.equals(UNDERGRADUATE))
-            return 90;
+            return 6;
 
         return 0;
     }

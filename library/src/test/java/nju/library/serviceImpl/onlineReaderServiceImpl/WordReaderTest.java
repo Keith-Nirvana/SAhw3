@@ -11,7 +11,9 @@ import static org.junit.Assert.*;
 public class WordReaderTest {
 
     @Test
+
     public void read() throws ParserConfigurationException, TransformerException, IOException {
         System.out.println(new WordReader().read("assignment"));
+
     }
 }
