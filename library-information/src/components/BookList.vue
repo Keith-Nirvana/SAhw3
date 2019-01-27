@@ -105,7 +105,6 @@
         }).catch(function (err) {
           console.log(err)
         })
-        // TODO 修改信息
       },
       modifyOrBorrow: function(book){
         if(!this.isEdit){
@@ -130,7 +129,7 @@
             userId: global.userId,
             bookId: bookId
           },
-          url: '/book/borrow',
+          url: '/book/borrowBook',
         }).then(response => {
           console.log(response)
           let _data = response.data

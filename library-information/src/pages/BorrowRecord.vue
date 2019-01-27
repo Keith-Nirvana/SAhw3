@@ -11,7 +11,7 @@
             <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="read(book.bookId, book.bookName)">
               在线阅读
             </el-button>
-            <el-button type="primary" :icon="icon" size="mini" @click="returnBook(book.bookId)">还书
+            <el-button type="primary" icon="el-icon-document" size="mini" @click="returnBook(book.bookId)">还书
             </el-button>
           </el-col>
         </el-row>
@@ -37,7 +37,6 @@
     },
     methods: {
       returnBook: function (bookId) {
-        // TODO 还书
         this.$axios({
           method: 'post',
           url: '/book/returnBook',
@@ -73,7 +72,6 @@
           return "三级"
       },
       getMyBorrowedBooks: function(){
-        // TODO 得到我的借书列表
         this.$axios({
           method: 'post',
           url: '/book/borrowedBooks',

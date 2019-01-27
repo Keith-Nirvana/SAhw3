@@ -1,5 +1,7 @@
 package nju.library.daoImpl;
 
+import java.util.Date;
+
 import nju.library.dao.DaoHelper;
 import nju.library.dao.RecordDao;
 import nju.library.entity.Record;
@@ -11,7 +13,7 @@ import java.util.List;
 public class RecordDaoImpl implements RecordDao {
     private DaoHelper daoHelper;
 
-    public RecordDaoImpl(){
+    public RecordDaoImpl() {
         daoHelper = new DaoHelperImpl();
     }
 
@@ -42,8 +44,10 @@ public class RecordDaoImpl implements RecordDao {
     public boolean modifyRecord(String recordId, double payment) {
         Connection conn = daoHelper.getConnection();
         try {
-            String sql = "UPDATE library_information.record SET payment=" + payment + " WHERE recordId='" +
-                    recordId + "'";
+            Timestamp timestamp = new Timestamp(new Date().getTime());
+            String sql =
+                    "UPDATE library_information.record SET payment=" + payment + ", returnDate = '" + timestamp + "' " +
+                    "WHERE " + "recordId='" + recordId + "'";
             Statement statement = conn.createStatement();
             int result = statement.executeUpdate(sql);
             if (result != 0) {
@@ -65,10 +69,10 @@ public class RecordDaoImpl implements RecordDao {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM library_information.record");
             List<Record> records = new ArrayList<>();
-            while (rs.next()){
+            while (rs.next()) {
                 records.add(new Record(rs.getString("recordId"), rs.getString("bookId"), rs.getString(
                         "readerId"), rs.getTimestamp("borrowDate"), rs.getTimestamp("returnDate"), rs.getDouble(
-                                "payment")));
+                        "payment")));
             }
             daoHelper.closeResource(conn, st, rs);
             return records;
@@ -91,8 +95,8 @@ public class RecordDaoImpl implements RecordDao {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
-            while (rs.next()){
-                if(rs.getTimestamp("returnDate") == null) {
+            while (rs.next()) {
+                if (rs.getTimestamp("returnDate") == null) {
                     records.add(new Record(rs.getString("recordId"), rs.getString("bookId"), rs.getString(
                             "readerId"), rs.getTimestamp("borrowDate"), rs.getTimestamp("returnDate"), rs.getDouble(
                             "payment")));
@@ -114,8 +118,8 @@ public class RecordDaoImpl implements RecordDao {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM library_information.record WHERE bookId='" + bookId + "'");
-            while (rs.next() ){
-                if(rs.getTimestamp("returnDate") == null){
+            while (rs.next()) {
+                if (rs.getTimestamp("returnDate") == null) {
                     Record record = new Record(rs.getString("recordId"), rs.getString("bookId"), rs.getString(
                             "readerId"), rs.getTimestamp("borrowDate"));
                     return record;

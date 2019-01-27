@@ -56,7 +56,7 @@
               global.changePermission(_data.permission)
               global.changeAdmin(false)
 
-              this.$router.push('/office/book')
+              this.$router.push('/office/info')
             }
             else if(_data.type == 'ADMINISTRATOR'){
               global.changeAdmin(true)

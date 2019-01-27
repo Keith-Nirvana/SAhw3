@@ -56,6 +56,6 @@ public class UserType {
             return 2;
         if(type.equals(UNDERGRADUATE))
             return 1;
-        return 0;
+        return 5;
     }
 }

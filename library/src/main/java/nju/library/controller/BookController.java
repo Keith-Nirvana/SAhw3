@@ -3,7 +3,6 @@ package nju.library.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import nju.library.entity.Book;
-import nju.library.entity.User;
 import nju.library.service.BookService;
 import nju.library.serviceImpl.BookServiceImpl;
 import org.springframework.stereotype.Controller;

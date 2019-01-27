@@ -59,6 +59,6 @@ public class BookServiceImpl implements BookService {
     @Override
     public boolean returnBook(String bookId, String userId) {
         User user = DaoFactory.getUserDao().getUserById(userId);
-        return user.returnBook(userId);
+        return user.returnBook(bookId);
     }
 }

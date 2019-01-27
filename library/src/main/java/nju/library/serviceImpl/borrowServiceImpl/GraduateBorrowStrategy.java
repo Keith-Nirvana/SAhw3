@@ -25,12 +25,12 @@ public class GraduateBorrowStrategy implements BorrowStrategy {
 
         int maxBorrowDays = UserType.getMaxBorrowDay(user.getType());
 
-        int betweenDays=
-                Integer.parseInt(String.valueOf((new Date().getTime() -record.getBorrowDate().getTime())/(1000*3600*24)));
+        int betweenDays =
+                Integer.parseInt(String.valueOf((new Date().getTime() - record.getBorrowDate().getTime()) / (1000 * 3600 * 24)));
 
         double payment = 0.0;
 
-        if(betweenDays > maxBorrowDays)
+        if (betweenDays > maxBorrowDays)
             payment = (betweenDays - maxBorrowDays) * 1.0;
 
         System.out.println("毕业生成功还书");

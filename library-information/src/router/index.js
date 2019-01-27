@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import SignInPage from '../pages/SignIn'
 import AdminStatisticPage from '../pages/AdminStatistic'
 import AdminBookOverviewPage from '../pages/AdminBookOverview'
-import OfficeBookOverviewPage from '../pages/OfficeBookOverview'
+import OfficeInfoPage from '../pages/OfficeInfo'
 import UserBookOverviewPage from '../pages/UserBookOverview'
 import UserOverviewPage from '../pages/AdminUserOverview'
 import AdminOnlineReaderPage from '../pages/AdminBookOnlineReader'
@@ -33,9 +33,9 @@ export default new Router({
       component: UserBookOverviewPage
     },
     {
-      path: '/office/book',
-      name: 'OfficeBookOverviewPage',
-      component: OfficeBookOverviewPage
+      path: '/office/info',
+      name: 'OfficeInfoPage',
+      component: OfficeInfoPage
     },
     {
       path: '/admin/user',
