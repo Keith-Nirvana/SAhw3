@@ -1,29 +1,78 @@
-## Software Architecture hw3
+## Software Architecture assignment-3
 
-​	One university intents to develop an information system for its library. The system is required to provide the functionalities such as the search and management of the information of literature (books), user management, online literature reading and so on. The users of the system are composed of teachers (lecturers), students, and administrators, with their different permissions. For example, teachers and students are eligible to borrow books from the library, but with distinct access to book categories, maximum numbers and borrowing periods. You need to develop the essential functions as below:
+[TOC]
 
-#### Component 1: 
+## 参与者
 
-Develop different borrowing methods for different user objects e.g.,teacher, undergraduate, and graduate, which are able to accommodate new (temporary)
-methods or adjustments in needed.
+161250004 曹嘉玮
 
-#### Component 2: 
+161250031 顾琦琪
 
-In the initial design, library administrators can edit literature (book)
-information, maintain and manage user’s information (e.g., teachers and students),
-such as generating report of borrowing records and overdue penalty payments and etc.
-In the future design, more user types can be added and administrators can grant the
-certain permission of user information management (e.g., creating or searching user
-info) to other departments or schools.
+## 项目启动
 
-#### Component 3: 
+1. 使用创建library_information数据库，执行``bash.sql``脚本导入数据
 
-Design the component of online literature reading that supports
-different document formats (e.g., Word, PDF, EPUB …), each of which needs a dedicated
-document reader.
+   ```shell
+   mysql -u root -p
+   [输入密码]
+   create database library_information;
+   use database library_information;
+   source [文件路径]
+   ```
 
-#### Component 4: 
+   
 
-Users have the permission to edit and update their personal
-information, administrators can receive the automatic notification once a user’s info is
-updated.
+2. 执行``runBackend.sh``脚本或者执行
+
+3. ```shell
+   cd library
+   mvn spring-boot:run
+   ```
+
+3. 执行``runFrontend.sh``脚本或者执行
+
+   ```shell
+   cd library-information
+   npm install
+   npm start
+   ```
+
+   
+
+## 项目概况
+
+1. 用户管理
+
+   ![image-20190127192507437](./images/1.png)
+
+2. 图书管理
+
+   ![image-20190127192556271](./images/2.png)
+
+3. 图书统计
+
+   ![image-20190127192626617](./images/3.png)
+
+4. 图书借阅
+
+   ![image-20190127192721833](./images/4.png)
+
+5. 在线阅读
+
+   ![image-20190127192826609](./images/5.png)
+
+6. 修改用户信息
+
+   ![image-20190127192953111](./images/6.png)
+
+7. 用户授权
+
+   ![image-20190127192908612](./images/7.png)
+
+8. 修改图书信息
+
+   ![image-20190127193218883](./images/8.png)
+
+9. 修改后管理员信息提示
+
+   ![image-20190127193050414](./images/9.png)

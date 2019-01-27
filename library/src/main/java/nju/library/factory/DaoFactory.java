@@ -8,7 +8,6 @@ import nju.library.daoImpl.BookDaoImpl;
 import nju.library.daoImpl.MessageDaoImpl;
 import nju.library.daoImpl.RecordDaoImpl;
 import nju.library.daoImpl.UserDaoImpl;
-import sun.plugin2.message.Message;
 
 public class DaoFactory {
     public static UserDao getUserDao(){
