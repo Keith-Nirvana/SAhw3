@@ -21,17 +21,14 @@ public class LoginController {
         // 直接将json信息打印出来
         System.out.println(jsonParam.toJSONString());
         String userId = jsonParam.getString("userId");
-        System.out.println(userId);
-
-        String password = jsonParam.getString("userId");
-        System.out.println(password);
+        String password = jsonParam.getString("password");
 
         User user = DaoFactory.getUserDao().getUserById(userId);
         // 将获取的json数据封装一层，然后在给返回
         JSONObject result = new JSONObject();
-        result.put("msg", "ok");
-        result.put("method", "json");
-//        result.put("data", jsonParam);
+        result.put("type", "OFFICE");
+        result.put("permission", "23");
+        result.put("isValid", true);
 
         return result.toJSONString();
     }

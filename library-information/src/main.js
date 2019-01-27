@@ -11,7 +11,9 @@ Vue.use(ElementUI);
 
 import axios from 'axios' //引入axios
 
-Vue.prototype.$ajax=axios
+Vue.prototype.$axios=axios
+axios.defaults.baseURL = '/api'
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 Vue.config.productionTip = false
 

@@ -6,7 +6,7 @@
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{user.userId}}</el-row>
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
           <el-col :span="12">{{getType(user.type)}}</el-col>
-          <el-col :span="12" style="text-align: right" v-show="user.type == 'OFFICE'">
+          <el-col :span="12" style="text-align: right" v-show="user.type == 'OFFICE' && isAdmin">
             <el-button type="primary" icon="el-icon-edit" size="mini" plain @click="grant(user.permission)">授权</el-button>
           </el-col>
         </el-row>
@@ -68,6 +68,7 @@
 </template>
 
 <script>
+  import global from '../../static/Global'
 
   export default {
     name: "book-list",
@@ -79,7 +80,8 @@
         tempForm: {},
         grantForm: {
           type:[]
-        }
+        },
+        isAdmin: global.isAdmin
       }
     },
     props: {

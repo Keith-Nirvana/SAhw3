@@ -53,11 +53,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf</artifactId>
-            <version>3.0.11.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.thymeleaf</groupId>-->
+            <!--<artifactId>thymeleaf</artifactId>-->
+            <!--<version>3.0.11.RELEASE</version>-->
+        <!--</dependency>-->
 
         <!--pdf reader-->
         <dependency>

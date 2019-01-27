@@ -1,7 +1,9 @@
 <template>
   <div>
     <navigation/>
-    <el-button type="primary" style="width: 66%; margin-top: 10px" @click="dialogFormVisible=true" :disabled="!isUserAdded">增加用户</el-button>
+    <el-button type="primary" style="width: 66%; margin-top: 10px" @click="dialogFormVisible=true"
+               :disabled="!isUserAdded">增加用户
+    </el-button>
     <user-list :userList="userList"/>
 
     <el-dialog title="增加用户" :visible.sync="dialogFormVisible">
@@ -89,16 +91,50 @@
       addUser: function () {
         console.log(this.form)
         // TODO 增加用户
+        this.$axios({
+          method: 'post',
+          url: '/user/addUser',
+          data: {
+            userId: this.form.userId,
+            userName: this.form.userName,
+            department: this.form.departmrnt,
+            email: this.form.email,
+            type: this.form.type
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.getAllUser()
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       cancelAdd: function () {
         this.dialogFormVisible = false
         this.form = {}
+      },
+      getAllUser: function () {
+        // TODO 得到所有用户
+        this.$axios({
+          method: 'get',
+          url: '/user/allUser',
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.userList = _data.userList
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     },
-    mounted: function(){
+    mounted: function () {
       console.log('hhh')
 
-      // TODO 获得所有用户
+      this.getAllUser()
     }
   }
 </script>
