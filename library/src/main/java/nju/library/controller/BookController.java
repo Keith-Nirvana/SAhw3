@@ -22,4 +22,36 @@ public class BookController {
 
         return result.toJSONString();
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/borrowedBooks", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String getBorrowedBooks(@RequestBody JSONObject jsonParam){
+        JSONObject result = new JSONObject();
+
+        return result.toJSONString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/borrowBook", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String borrowBook(@RequestBody JSONObject jsonParam){
+        JSONObject result = new JSONObject();
+
+        return result.toJSONString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/returnBook", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String returnBook(@RequestBody JSONObject jsonParam){
+        JSONObject result = new JSONObject();
+
+        return result.toJSONString();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/modifyBook", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+    public String modifyBook(@RequestBody JSONObject jsonParam){
+        JSONObject result = new JSONObject();
+
+        return result.toJSONString();
+    }
 }
