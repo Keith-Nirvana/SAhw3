@@ -8,6 +8,11 @@ public class Record {
     private String readerId;
     private Date borrowDate;
     private Date returnDate;
+
+    public void setPayment(double payment) {
+        this.payment = payment;
+    }
+
     private double payment;
 
     public Record() {
