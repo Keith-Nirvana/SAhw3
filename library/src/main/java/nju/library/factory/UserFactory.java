@@ -16,6 +16,6 @@ public class UserFactory {
         else if (type.equals(UserType.TEACHER))
             return new Teacher(userId, password, userName, department, email, type, permission);
         else
-            return null;
+            return new User(userId, password, userName, department, email, type, permission);
     }
 }
