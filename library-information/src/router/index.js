@@ -11,6 +11,7 @@ import AdminOnlineReaderPage from '../pages/AdminBookOnlineReader'
 import UserOnlineReaderPage from '../pages/UserBookOnlineReader'
 import UserInfoPage from '../pages/UserInfo'
 import BorrowRecordPage from '../pages/BorrowRecord'
+import AdminMessagePage from '../pages/AdminMessage'
 
 Vue.use(Router)
 
@@ -65,6 +66,11 @@ export default new Router({
       path: '/user/record',
       name: 'BorrowRecordPage',
       component: BorrowRecordPage
+    },
+    {
+      path: '/admin/message',
+      name: 'AdminMessagePage',
+      component: AdminMessagePage
     },
   ]
 })
