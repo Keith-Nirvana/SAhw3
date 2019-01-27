@@ -30,9 +30,7 @@
     components: {userNavigation},
     data() {
       return {
-        bookList: [{bookName: '寒假作业', bookId: 'Nj20394', isBorrowed: true, category: 2},
-          {bookName: '暑假作业', bookId: 'N990394', isBorrowed: false, category: 1},
-          {bookName: '课时作业', bookId: 'Nj20394', isBorrowed: false, category: 3}]
+        bookList: []
       }
     },
     methods: {
@@ -45,9 +43,7 @@
             bookId: bookId
           }
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
 
           this.$notify({
             title: '成功',
@@ -79,9 +75,7 @@
             userId: global.userId
           }
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
 
           this.bookList = _data.bookList
         }).catch(function (err) {

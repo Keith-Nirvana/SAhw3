@@ -29,10 +29,6 @@
       }
     },
     mounted() {
-      console.log(global.isBookEdit + '4')
-      console.log(global.isUserManagement + "2")
-      console.log(global.isUserAdded + '3')
-      // console.log(isBookEdit + '4')
     },
     methods:{
       home: function(){

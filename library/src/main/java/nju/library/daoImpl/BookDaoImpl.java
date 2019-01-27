@@ -86,4 +86,32 @@ public class BookDaoImpl implements BookDao {
 
         return books;
     }
+
+    @Override
+    public Book getBookById(String bookId) {
+        Connection conn = daoHelper.getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            String sql = "SELECT * FROM library_information.book WHERE bookId = '" + bookId + "'";
+
+            stmt = conn.createStatement();
+            rs = stmt.executeQuery(sql);
+
+            while (rs.next()){
+                boolean isBorrowed = (rs.getInt(5) == 1);
+                Book book = new Book(
+                        rs.getString(1), rs.getString(2), rs.getInt(3),
+                        rs.getString(4), isBorrowed
+                );
+
+                return book;
+            }
+        } catch (SQLException ex){
+            ex.printStackTrace();
+        }
+
+        return null;
+    }
 }

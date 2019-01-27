@@ -14,4 +14,6 @@ public interface BookService {
     public boolean borrowBook(String bookId, String userId);
 
     public boolean returnBook(String bookId, String userId);
+
+    public Book getBookById(String bookId);
 }

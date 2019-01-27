@@ -89,7 +89,6 @@
       userList: Array
     },
     mounted() {
-
     },
     methods: {
       getType: function(type){
@@ -103,14 +102,12 @@
           return '学工处'
       },
       modifyUserInfo: function(user){
-        console.log(user)
         this.form = user
         this.tempForm = user
         this.dialogFormVisible = true
       },
       confirmModify: function(){
         this.dialogFormVisible = false
-        console.log(this.form)
 
         this.$axios({
           method: 'post',
@@ -123,9 +120,7 @@
             type: this.form.type
           }
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
 
           this.dialogFormVisible = false
 
@@ -145,8 +140,6 @@
         // this.getUserList()
       },
       grant: function(permission, userId){
-        console.log(permission + "!!!!!!!!!!")
-        console.log(userId)
         this.grantFormVisible = true
 
         this.tempUser = userId
@@ -167,7 +160,6 @@
       },
       confirmGrant: function(){
         this.grantFormVisible = false
-        console.log(this.grantForm.type + 'type')
 
         let permission = ""
 
@@ -188,9 +180,7 @@
             permission: permission,
           }
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
           this.dialogFormVisible = false
 
           this.$notify({
@@ -208,14 +198,11 @@
         this.grantFormVisible = false
       },
       getUserList: function(){
-        // TODO 需要根据是否为管理员，对于不是管理员的用户，只能显示三个身份的用户
         this.$axios({
           method: 'get',
           url: '/user/allUser',
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
 
           let users = _data.userList
 

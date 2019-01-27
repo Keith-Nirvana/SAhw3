@@ -16,6 +16,7 @@
         placeholder="密码"
         v-model="password"
         clearable
+        type="password"
         class="text-input">
       </el-input>
     </el-row>

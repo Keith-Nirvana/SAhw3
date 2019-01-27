@@ -14,13 +14,23 @@
     name: "user-book-online-reader",
     data(){
       return{
-        html: `<body><div>
-    <img src="./../static/bookImages/assignment0.png" style="width:100%;height:auto" />
- </div><div>
-    <img src="./../static/bookImages/assignment1.png" style="width:100%;height:auto" />
- </div></body>`,
-        bookName: '寒假作业'
+        html: ``,
       }
+    },
+    mounted(){
+      this.$axios({
+        method: 'post',
+        url: '/book/readBook',
+        data: {
+          bookId: this.$route.params.bookId,
+          bookName: this.$route.params.bookName
+        }
+      }).then(response => {
+        let _data = response.data
+        this.html = _data.html
+      }).catch(function (err) {
+        console.log(err)
+      })
     }
   }
 </script>

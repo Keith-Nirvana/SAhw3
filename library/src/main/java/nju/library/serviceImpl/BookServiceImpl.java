@@ -61,4 +61,10 @@ public class BookServiceImpl implements BookService {
         User user = DaoFactory.getUserDao().getUserById(userId);
         return user.returnBook(bookId);
     }
+
+    @Override
+    public Book getBookById(String bookId){
+        return DaoFactory.getBookDao().getBookById(bookId);
+    }
+
 }

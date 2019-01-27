@@ -10,4 +10,6 @@ public interface BookDao {
     public boolean modifyBookInfo(String bookId, String bookName, int category);
 
     public List<Book> getAllBooks();
+
+    public Book getBookById(String bookId);
 }

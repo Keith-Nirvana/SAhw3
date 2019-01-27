@@ -56,7 +56,8 @@
         isUserAdded: global.isUserAdded,
         userList: [],
         dialogFormVisible: false,
-        form: {}
+        form: {},
+        isAdmin: global.isAdmin
       }
     },
     methods: {
@@ -73,9 +74,7 @@
             type: this.form.type
           }
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
 
           this.dialogFormVisible = false
           this.$notify({
@@ -93,14 +92,27 @@
         this.form = {}
       },
       getAllUser: function () {
-        // TODO 得到所有用户
         this.$axios({
           method: 'get',
           url: '/user/allUser',
         }).then(response => {
-          console.log(response)
           let _data = response.data
-          console.log(_data)
+
+          let users = _data.userList
+
+          if(this.isAdmin)
+            this.userList = _data.userList
+          else{
+            let my_list = []
+
+            for ( let i = 0; i <users.length; i++){
+              console.log(users[i]);
+              if(users[i].type === 'TEACHER' || users[i].type === 'UNDERGRADUATE' || users[i].type === 'GRADUATE')
+                my_list.push(users[i])
+            }
+
+            this.userList = my_list
+          }
 
           this.userList = _data.userList
         }).catch(function (err) {

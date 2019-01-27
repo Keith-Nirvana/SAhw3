@@ -9,7 +9,7 @@
             <el-button type="primary" icon="el-icon-document" size="mini" @click="readMessage(message.messageId)">已读</el-button>
           </el-col>
         </el-row>
-        <el-row style="text-align: left; color: #3e86ff; font-weight: bold; font-size: 25px">{{message.content}}</el-row>
+        <el-row style="text-align: left; color: #3e86ff; font-weight: bold; font-size: 25px">{{message.message}}</el-row>
       </el-card>
     </el-col>
   </div>
@@ -29,10 +29,9 @@
     },
     methods: {
       readMessage: function(messageId){
-        // TODO
         this.$axios({
           method: 'post',
-          url: '/message/read',
+          url: '/message/readMessage',
           data: {
             userId: global.userId,
             messageId: messageId,
@@ -43,16 +42,19 @@
           console.log(_data)
 
           this.getAllMessage()
-          alert("成功阅读！")
+          this.$notify({
+            title: '成功',
+            message: '成功阅读',
+            type: 'success'
+          });
         }).catch(function (err) {
           console.log(err)
         })
       },
       getAllMessage: function(){
-        // TODO
         this.$axios({
           method: 'post',
-          url: '/message/all',
+          url: '/message/getMessages',
           data: {
             userId: global.userId
           }
