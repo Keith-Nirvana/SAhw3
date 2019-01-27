@@ -37,16 +37,13 @@
     },
     methods:{
       signIn: function(){
-        // TODO,验证登陆,用户权限
-        // this.$router.push('/user/book')
-
         this.$axios({
           method: 'post',
           // url:'../static/test/getInfo.json', //<---本地地址
           url: '/user/login',
           data:{
             userId: this.id,
-            username: this.password
+            password: this.password
           }
         }).then(response=>{
           console.log(response)
@@ -62,7 +59,7 @@
               this.$router.push('/office/book')
             }
             else if(_data.type == 'ADMINISTRATOR'){
-              global.changeAdmin(false)
+              global.changeAdmin(true)
               this.$router.push('/admin/user')
             }
             else{

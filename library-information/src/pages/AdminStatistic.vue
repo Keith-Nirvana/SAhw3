@@ -35,27 +35,6 @@
         activeName: 'first',
         borrowRecord: [],
         paymentRecord: [],
-        gridData: [{
-          userName: 'kiki',
-          userId: '161250031',
-          type: 'UNDERGRADUATE',
-          email: '161250031@smail.nju.edu.cn',
-          department: '软件学院'
-        },
-          {
-            userName: 'keith',
-            userId: '161250033',
-            type: 'UNDERGRADUATE',
-            email: '161250031@smail.nju.edu.cn',
-            department: '软件学院'
-          },
-          {
-            userName: 'max',
-            userId: '161250035',
-            type: 'UNDERGRADUATE',
-            email: '161250031@smail.nju.edu.cn',
-            department: '软件学院'
-          }],
       }
     },
     methods: {

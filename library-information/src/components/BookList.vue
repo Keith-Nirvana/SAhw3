@@ -86,7 +86,7 @@
 
         this.$axios({
           method: 'post',
-          url: '/book/modify',
+          url: '/book/modifyBook',
           data: {
             bookId: this.form.bookId,
             bookName: this.form.bookName,
@@ -97,7 +97,11 @@
           let _data = response.data
           console.log(_data)
 
-          alert("修改成功！")
+          this.$notify({
+            title: '成功',
+            message: '修改信息成功',
+            type: 'success'
+          });
         }).catch(function (err) {
           console.log(err)
         })
@@ -132,7 +136,11 @@
           let _data = response.data
           console.log(_data)
 
-          alert('借阅成功！')
+          this.$notify({
+            title: '成功',
+            message: '借书成功',
+            type: 'success'
+          });
         }).catch(function (err) {
           console.log(err)
         })

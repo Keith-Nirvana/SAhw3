@@ -54,35 +54,7 @@
     data() {
       return {
         isUserAdded: global.isUserAdded,
-        userList: [{
-          userName: 'kiki',
-          userId: '161250031',
-          type: 'UNDERGRADUATE',
-          email: '161250031@smail.nju.edu.cn',
-          department: '软件学院'
-        },
-          {
-            userName: 'keith',
-            userId: '161250033',
-            type: 'UNDERGRADUATE',
-            email: '161250031@smail.nju.edu.cn',
-            department: '软件学院'
-          },
-          {
-            userName: 'max',
-            userId: '161250035',
-            type: 'UNDERGRADUATE',
-            email: '161250031@smail.nju.edu.cn',
-            department: '软件学院'
-          },
-          {
-            userName: 'max',
-            userId: '161250035',
-            type: 'OFFICE',
-            email: '161250031@smail.nju.edu.cn',
-            department: '软件学院',
-            permission: '23'
-          }],
+        userList: [],
         dialogFormVisible: false,
         form: {}
       }
@@ -90,7 +62,6 @@
     methods: {
       addUser: function () {
         console.log(this.form)
-        // TODO 增加用户
         this.$axios({
           method: 'post',
           url: '/user/addUser',
@@ -106,6 +77,12 @@
           let _data = response.data
           console.log(_data)
 
+          this.dialogFormVisible = false
+          this.$notify({
+            title: '成功',
+            message: '成功增加用户',
+            type: 'success'
+          });
           this.getAllUser()
         }).catch(function (err) {
           console.log(err)
@@ -132,8 +109,6 @@
       }
     },
     mounted: function () {
-      console.log('hhh')
-
       this.getAllUser()
     }
   }

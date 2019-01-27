@@ -38,7 +38,6 @@ public class UserController {
 
             jsonArray.add(jsonObject);
         }
-//        return result.toJSONString();
 
         JSONObject result = new JSONObject();
         result.put("userList", jsonArray);
@@ -49,7 +48,6 @@ public class UserController {
     @RequestMapping(value = "/id", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String getUserById(@RequestBody JSONObject jsonParam){
         String userId = jsonParam.getString("userId");
-        System.out.println(userId);
 
         User user = userService.getUserById(userId);
 
@@ -102,11 +100,9 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/grant", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String grantPermission(@RequestBody JSONObject jsonParam){
-        
         String userId = jsonParam.getString("userId");
-        String permission = jsonParam.getString("perimission");
+        String permission = jsonParam.getString("permission");
 
-        // TODO
         boolean result = userService.grantPermission(userId, permission);
 
         JSONObject jsonObject = new JSONObject();

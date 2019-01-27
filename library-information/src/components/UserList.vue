@@ -111,10 +111,10 @@
       confirmModify: function(){
         this.dialogFormVisible = false
         console.log(this.form)
-        // TODO 修改信息
+
         this.$axios({
           method: 'post',
-          url: '/user/modify',
+          url: '/user/modifyUser',
           data: {
             userId: this.form.userId,
             userName: this.form.userName,
@@ -127,7 +127,13 @@
           let _data = response.data
           console.log(_data)
 
-          alert("修改成功！")
+          this.dialogFormVisible = false
+
+          this.$notify({
+            title: '成功',
+            message: '修改成功',
+            type: 'success'
+          });
         }).catch(function (err) {
           console.log(err)
         })
@@ -136,14 +142,20 @@
         this.dialogFormVisible = false
         this.form = this.tempForm
 
-        this.getUserList()
+        // this.getUserList()
       },
       grant: function(permission, userId){
+        console.log(permission + "!!!!!!!!!!")
+        console.log(userId)
         this.grantFormVisible = true
 
         this.tempUser = userId
 
         this.grantForm.type = []
+
+        if(permission === undefined)
+          return
+
         if(permission.search("2") != -1)
           this.grantForm.type.push("编辑用户")
 
@@ -155,7 +167,7 @@
       },
       confirmGrant: function(){
         this.grantFormVisible = false
-        console.log(this.grantForm.type)
+        console.log(this.grantForm.type + 'type')
 
         let permission = ""
 
@@ -168,8 +180,6 @@
         if(this.grantForm.type.includes("编辑图书"))
           permission = permission + "4"
 
-        console.log(permission)
-        // TODO 授权,之后重新获取列表
         this.$axios({
           method: 'post',
           url: '/user/grant',
@@ -181,8 +191,13 @@
           console.log(response)
           let _data = response.data
           console.log(_data)
+          this.dialogFormVisible = false
 
-          alert("修改成功！")
+          this.$notify({
+            title: '成功',
+            message: '授权成功',
+            type: 'success'
+          });
         }).catch(function (err) {
           console.log(err)
         })
