@@ -74,4 +74,12 @@ public class User {
                 + ", " + this.department + ", " + this.email + ", "+ this.type
                 + ", " + this.permission;
     }
+
+    public boolean borrowBook(String bookId){
+        return false;
+    }
+
+    public boolean returnBook(String bookId){
+        return false;
+    }
 }

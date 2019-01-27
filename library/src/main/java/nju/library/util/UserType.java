@@ -48,4 +48,14 @@ public class UserType {
     public static String getDefaultPermission(String type){
         return defaultPermission.get(type);
     }
+
+    public static int getPermittedBorrowedBooksType(String type){
+        if(type.equals(TEACHER))
+            return 3;
+        if(type.equals(GRADUATE))
+            return 2;
+        if(type.equals(UNDERGRADUATE))
+            return 1;
+        return 0;
+    }
 }

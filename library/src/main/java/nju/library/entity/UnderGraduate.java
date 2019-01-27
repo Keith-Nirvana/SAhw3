@@ -20,11 +20,13 @@ public class UnderGraduate extends User {
         this.borrowStrategy = borrowStrategy;
     }
 
+    @Override
     public boolean borrowBook(String bookId) {
         return borrowStrategy.borrowBook(super.getUserId(), bookId);
     }
 
-    public boolean retutnBook(String bookId) {
+    @Override
+    public boolean returnBook(String bookId) {
         return borrowStrategy.returnBook(super.getUserId(), bookId);
     }
 }
