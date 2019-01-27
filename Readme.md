@@ -1,6 +1,4 @@
-## Software Architecture assignment-3
-
-[TOC]
+# Software Architecture assignment-3
 
 ## 参与者
 
