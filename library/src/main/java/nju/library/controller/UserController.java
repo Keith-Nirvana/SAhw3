@@ -39,7 +39,10 @@ public class UserController {
             jsonArray.add(jsonObject);
         }
 //        return result.toJSONString();
-        return jsonArray.toJSONString();
+
+        JSONObject result = new JSONObject();
+        result.put("userList", jsonArray);
+        return result.toJSONString();
     }
 
     @ResponseBody
@@ -99,6 +102,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping(value = "/grant", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public String grantPermission(@RequestBody JSONObject jsonParam){
+        
         String userId = jsonParam.getString("userId");
         String permission = jsonParam.getString("perimission");
 
