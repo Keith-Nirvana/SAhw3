@@ -1,40 +1,62 @@
 package nju.library.serviceImpl.onlineReaderServiceImpl;
 
 import nju.library.service.OnlineReader;
-import org.apache.poi.POIXMLDocument;
-import org.apache.poi.POIXMLTextExtractor;
-import org.apache.poi.hwpf.extractor.WordExtractor;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
+import org.apache.poi.hwpf.HWPFDocument;
+import org.apache.poi.hwpf.converter.PicturesManager;
+import org.apache.poi.hwpf.converter.WordToHtmlConverter;
+import org.apache.poi.hwpf.usermodel.Picture;
+import org.apache.poi.hwpf.usermodel.PictureType;
+import org.w3c.dom.Document;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.*;
+import java.util.List;
 
 public class WordReader extends OnlineReader {
     @Override
-    public String read(String bookName) {
-        String path = System.getProperty("user.dir") + "/src/main/resources/books/" +
-                bookName + ".docx";
-        String s = "";
-        try {
-            if (path.endsWith(".doc")) {
-                InputStream is = new FileInputStream(new File(path));
-                WordExtractor ex = new WordExtractor(is);
-                s = ex.getText();
-            } else if (path.endsWith("docx")) {
-                OPCPackage opcPackage = POIXMLDocument.openPackage(path);
-                POIXMLTextExtractor extractor = new XWPFWordExtractor(opcPackage);
-                s = extractor.getText();
-            } else {
-                System.out.println("传入的word文件不正确:" + path);
+    public String read(String bookName) throws IOException, ParserConfigurationException, TransformerException {
+        String path = System.getProperty("user.dir");
+        String file = bookName + ".doc";
+        InputStream input = new FileInputStream(path + "/src/main/resources/books/" + file);
+        HWPFDocument wordDocument = new HWPFDocument(input);
+        WordToHtmlConverter wordToHtmlConverter = new WordToHtmlConverter(
+                DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument());
+        wordToHtmlConverter.setPicturesManager(new PicturesManager() {
+            public String savePicture(byte[] content, PictureType pictureType,
+                                      String suggestedName, float widthInches, float heightInches) {
+                return suggestedName;
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        });
+        wordToHtmlConverter.processDocument(wordDocument);
+        List pics = wordDocument.getPicturesTable().getAllPictures();
+        if (pics != null) {
+            for (int i = 0; i < pics.size(); i++) {
+                Picture pic = (Picture) pics.get(i);
+                try {
+                    pic.writeImageContent(new FileOutputStream(path.substring(0, path.length() - 8) +
+                            "/library-information/static/bookImages/" + pic.suggestFullFileName()));
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-        StringBuffer bf = new StringBuffer(s);
-        return bf.toString();
+        Document htmlDocument = wordToHtmlConverter.getDocument();
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        DOMSource domSource = new DOMSource(htmlDocument);
+        StreamResult streamResult = new StreamResult(outStream);
+        TransformerFactory tf = TransformerFactory.newInstance();
+        Transformer serializer = tf.newTransformer();
+        serializer.setOutputProperty(OutputKeys.ENCODING, "utf-8");
+        serializer.setOutputProperty(OutputKeys.INDENT, "yes");
+        serializer.setOutputProperty(OutputKeys.METHOD, "html");
+        serializer.transform(domSource, streamResult);
+        outStream.close();
+        String content = new String(outStream.toByteArray());
 
+        return content;
     }
 }
