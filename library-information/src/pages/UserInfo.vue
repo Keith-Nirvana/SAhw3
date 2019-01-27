@@ -6,6 +6,8 @@
 </template>
 
 <script>
+  import global from '../../static/Global'
+
   const userList = () => import('../components/UserList.vue')
   const userNavigation = () => import('../components/UserNavigation')
 
@@ -14,9 +16,25 @@
     components:{userList, userNavigation},
     data() {
       return {
-        userList: [{userName: 'kiki', userId: '161250031', type: 'UNDERGRADUATE', email: '161250031@smail.nju.edu.cn', department: '软件学院'},],
+        userList: []
       }
     },
+    mounted(){
+      this.$axios({
+        method: 'post',
+        url: '/user/id',
+        data:{
+          userId: global.userId,
+        }
+      }).then(response=>{
+        let _data=response.data;
+        console.log(_data)
+
+        this.userList = [{userName: _data.userName, userId: _data.userId, type: _data.type, email: _data.email, department: _data.department}]
+      }).catch(function(err){
+        console.log(err)
+      })
+    }
   }
 </script>
 

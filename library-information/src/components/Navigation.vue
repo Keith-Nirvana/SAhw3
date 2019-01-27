@@ -2,6 +2,7 @@
   <el-menu default-active="1" mode="horizontal" background-color="#545c64"
            text-color="#fff" active-text-color="#ffd04b" router>
     <img style="width: 45px; height: 45px; float: left; margin-top: 10px; margin-left: 10px; margin-right: 10px"
+         @click="home"
          src="../assets/logo.png">
     <el-menu-item index="/office/book" v-show="!isAdmin">图书借阅</el-menu-item>
     <el-menu-item index="/admin/user" :disabled="!isUserManagement">用户管理</el-menu-item>
@@ -32,6 +33,11 @@
       console.log(global.isUserAdded + '3')
       // console.log(isBookEdit + '4')
     },
+    methods:{
+      home: function(){
+        this.$router.push("/")
+      }
+    }
   }
 </script>
 

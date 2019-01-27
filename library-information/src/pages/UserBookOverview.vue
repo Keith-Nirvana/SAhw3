@@ -8,6 +8,8 @@
 </template>
 
 <script>
+  import global from '../../static/Global'
+
   const userNavigation = () => import('../components/UserNavigation')
   const bookList = () => import('../components/BookList.vue')
   export default {
@@ -21,6 +23,24 @@
           {bookName: '课时作业', bookId: 'Nj20394', isBorrowed: false, category: 3}],
       }
     },
+    mounted(){
+      // TODO 获得所有图书
+      this.$axios({
+        method: 'post',
+        url: '/book/allBooks',
+        data:{
+          userId: global.userId,
+        }
+      }).then(response=>{
+        console.log(response)
+        let _data=response.data;
+        console.log(_data)
+
+        this.bookList = _data.bookList
+      }).catch(function(err){
+        console.log(err)
+      })
+    }
   }
 </script>
 

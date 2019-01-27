@@ -21,6 +21,8 @@
 </template>
 
 <script>
+  import global from '../../static/Global'
+
   const userNavigation = () => import('../components/UserNavigation')
 
   export default {
@@ -36,6 +38,28 @@
     methods: {
       returnBook: function (bookId) {
         // TODO 还书
+        this.$axios({
+          method: 'post',
+          url: '/book/returnBook',
+          data: {
+            userId: global.userId,
+            bookId: bookId
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.$notify({
+            title: '成功',
+            message: '还书成功',
+            type: 'success'
+          });
+
+          this.getMyBorrowedBooks()
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       read: function (bookId, bookName) {
         this.$router.push({name: 'UserOnlineReaderPage', params: {bookName: bookName, bookId: bookId}})
@@ -50,6 +74,21 @@
       },
       getMyBorrowedBooks: function(){
         // TODO 得到我的借书列表
+        this.$axios({
+          method: 'post',
+          url: '/book/borrowedBooks',
+          data: {
+            userId: global.userId
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.bookList = _data.bookList
+        }).catch(function (err) {
+          console.log(err)
+        })
       }
     },
     mounted() {

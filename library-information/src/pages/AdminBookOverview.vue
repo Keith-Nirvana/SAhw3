@@ -7,7 +7,6 @@
 </template>
 
 <script>
-
   import global from '../../static/Global'
 
   const navigation = () => import('../components/Navigation')
