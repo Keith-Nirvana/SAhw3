@@ -7,7 +7,7 @@
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
           <el-col :span="12">{{getType(user.type)}}</el-col>
           <el-col :span="12" style="text-align: right" v-show="user.type == 'OFFICE' && isAdmin">
-            <el-button type="primary" icon="el-icon-edit" size="mini" plain @click="grant(user.permission)">授权</el-button>
+            <el-button type="primary" icon="el-icon-edit" size="mini" plain @click="grant(user.permission, user.userId)">授权</el-button>
           </el-col>
         </el-row>
         <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{user.department}}</el-row>
@@ -81,7 +81,8 @@
         grantForm: {
           type:[]
         },
-        isAdmin: global.isAdmin
+        isAdmin: global.isAdmin,
+        tempUser: ''
       }
     },
     props: {
@@ -111,14 +112,36 @@
         this.dialogFormVisible = false
         console.log(this.form)
         // TODO 修改信息
+        this.$axios({
+          method: 'post',
+          url: '/user/modify',
+          data: {
+            userId: this.form.userId,
+            userName: this.form.userName,
+            department: this.form.department,
+            email: this.form.email,
+            type: this.form.type
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          alert("修改成功！")
+        }).catch(function (err) {
+          console.log(err)
+        })
       },
       cancelModify: function(){
         this.dialogFormVisible = false
         this.form = this.tempForm
-        // TODO 刷新列表
+
+        this.getUserList()
       },
-      grant: function(permission){
+      grant: function(permission, userId){
         this.grantFormVisible = true
+
+        this.tempUser = userId
 
         this.grantForm.type = []
         if(permission.search("2") != -1)
@@ -147,11 +170,57 @@
 
         console.log(permission)
         // TODO 授权,之后重新获取列表
+        this.$axios({
+          method: 'post',
+          url: '/user/grant',
+          data: {
+            userId: this.tempUser,
+            permission: permission,
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          alert("修改成功！")
+        }).catch(function (err) {
+          console.log(err)
+        })
+
+        this.getUserList()
       },
       cancelGrant: function(){
         this.grantFormVisible = false
       },
+      getUserList: function(){
+        // TODO 需要根据是否为管理员，对于不是管理员的用户，只能显示三个身份的用户
+        this.$axios({
+          method: 'get',
+          url: '/user/allUser',
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
 
+          let users = _data.userList
+
+          if(this.isAdmin)
+            this.userList = _data.userList
+          else{
+            let my_list = []
+
+            for ( let i = 0; i <users.length; i++){
+              console.log(users[i]);
+              if(users[i].type === 'TEACHER' || users[i].type === 'UNDERGRADUATE' || users[i].type === 'GRADUATE')
+                my_list.push(users[i])
+            }
+
+            this.userList = my_list
+          }
+        }).catch(function (err) {
+          console.log(err)
+        })
+      }
     }
 
   }

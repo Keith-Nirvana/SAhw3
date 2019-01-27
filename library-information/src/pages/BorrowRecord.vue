@@ -1,10 +1,60 @@
 <template>
-
+  <div>
+    <user-navigation/>
+    <el-col :span="16" :offset="4">
+      <el-card shadow="never" style="margin-top: 10px" v-for="book in bookList">
+        <el-row style="text-align: left; color: #3e86ff; font-weight: bold; font-size: 25px">{{book.bookName}}</el-row>
+        <el-row style="text-align: left; font-size: 18px; margin-top: 5px">{{getCategory(book.category)}}</el-row>
+        <el-row style="text-align: left; font-size: 18px; margin-top: 5px">
+          <el-col :span="12">索书号：{{book.bookId}}</el-col>
+          <el-col :span="12" style="text-align: right">
+            <el-button type="success" icon="el-icon-zoom-in" size="mini" @click="read(book.bookId, book.bookName)">
+              在线阅读
+            </el-button>
+            <el-button type="primary" :icon="icon" size="mini" @click="returnBook(book.bookId)">还书
+            </el-button>
+          </el-col>
+        </el-row>
+      </el-card>
+    </el-col>
+  </div>
 </template>
 
 <script>
+  const userNavigation = () => import('../components/UserNavigation')
+
   export default {
-    name: "borrow-record"
+    name: "borrow-record",
+    components: {userNavigation},
+    data() {
+      return {
+        bookList: [{bookName: '寒假作业', bookId: 'Nj20394', isBorrowed: true, category: 2},
+          {bookName: '暑假作业', bookId: 'N990394', isBorrowed: false, category: 1},
+          {bookName: '课时作业', bookId: 'Nj20394', isBorrowed: false, category: 3}]
+      }
+    },
+    methods: {
+      returnBook: function (bookId) {
+        // TODO 还书
+      },
+      read: function (bookId, bookName) {
+        this.$router.push({name: 'UserOnlineReaderPage', params: {bookName: bookName, bookId: bookId}})
+      },
+      getCategory: function (category) {
+        if (category === 1)
+          return "一级"
+        if (category === 2)
+          return "二级"
+        if (category === 3)
+          return "三级"
+      },
+      getMyBorrowedBooks: function(){
+        // TODO 得到我的借书列表
+      }
+    },
+    mounted() {
+      this.getMyBorrowedBooks()
+    }
   }
 </script>
 

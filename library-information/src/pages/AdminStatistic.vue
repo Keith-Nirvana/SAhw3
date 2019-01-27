@@ -58,6 +58,40 @@
           }],
       }
     },
+    methods: {
+      getBorrowRecords: function(){
+        this.$axios({
+          method: 'get',
+          url: '/statistic/borrow',
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.borrowRecord = _data.borrowRecord
+        }).catch(function (err) {
+          console.log(err)
+        })
+      },
+      getPaymentRecords: function(){
+        this.$axios({
+          method: 'get',
+          url: '/statistic/payment',
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          this.paymentRecord = _data.paymentRecord
+        }).catch(function (err) {
+          console.log(err)
+        })
+      }
+    },
+    mounted(){
+      this.getBorrowRecords()
+      this.getPaymentRecords()
+    }
   }
 </script>
 

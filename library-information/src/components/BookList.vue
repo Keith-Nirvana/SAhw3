@@ -42,6 +42,7 @@
 </template>
 
 <script>
+  import global from '../../static/Global'
 
   export default {
     name: "book-list",
@@ -83,6 +84,23 @@
 
         console.log(this.form)
 
+        this.$axios({
+          method: 'post',
+          url: '/book/modify',
+          data: {
+            bookId: this.form.bookId,
+            bookName: this.form.bookName,
+            category: this.form.category
+          }
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          alert("修改成功！")
+        }).catch(function (err) {
+          console.log(err)
+        })
         // TODO 修改信息
       },
       modifyOrBorrow: function(book){
@@ -102,6 +120,23 @@
       borrow: function(bookId){
         console.log(bookId)
         // TODO 借书
+        this.$axios({
+          method: 'post',
+          data:{
+            userId: global.userId,
+            bookId: bookId
+          },
+          url: '/book/borrow',
+        }).then(response => {
+          console.log(response)
+          let _data = response.data
+          console.log(_data)
+
+          alert('借阅成功！')
+        }).catch(function (err) {
+          console.log(err)
+        })
+
       },
       read: function(bookId, bookName){
         if(this.isEdit)
