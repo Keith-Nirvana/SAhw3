@@ -212,7 +212,6 @@
             let my_list = []
 
             for ( let i = 0; i <users.length; i++){
-              console.log(users[i]);
               if(users[i].type === 'TEACHER' || users[i].type === 'UNDERGRADUATE' || users[i].type === 'GRADUATE')
                 my_list.push(users[i])
             }
