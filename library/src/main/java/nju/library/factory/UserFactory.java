@@ -4,17 +4,18 @@ import nju.library.entity.*;
 import nju.library.util.UserType;
 
 public class UserFactory {
-    public static User createUser(String userId, String userName, String department,
-                                  String email, String type, String permission){
+    public static User createUser(String userId, String password, String userName, String department,
+                                  String email, String type, String permission) {
+        System.out.println(type);
         if (type.equals(UserType.ADMINISTRATOR))
-            return new Administrator(userId, userName, department, email, type,permission);
+            return new Administrator(userId, password, userName, department, email, type, permission);
         else if (type.equals(UserType.GRADUATE))
-            return new Graduate(userId, userName, department, email, type,permission);
+            return new Graduate(userId, password, userName, department, email, type, permission);
         else if (type.equals(UserType.UNDERGRADUATE))
-            return new UnderGraduate(userId, userName, department, email, type,permission);
+            return new UnderGraduate(userId, password, userName, department, email, type, permission);
         else if (type.equals(UserType.TEACHER))
-            return new Teacher(userId, userName, department, email, type,permission);
+            return new Teacher(userId, password, userName, department, email, type, permission);
         else
-            return  null;
+            return null;
     }
 }

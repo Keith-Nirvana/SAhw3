@@ -2,7 +2,6 @@ package nju.library.daoImpl;
 
 import nju.library.dao.DaoHelper;
 import nju.library.dao.UserDao;
-import nju.library.entity.Record;
 import nju.library.entity.User;
 import nju.library.factory.UserFactory;
 
@@ -13,7 +12,7 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     private DaoHelper daoHelper;
 
-    public UserDaoImpl(){
+    public UserDaoImpl() {
         daoHelper = new DaoHelperImpl();
     }
 
@@ -24,8 +23,9 @@ public class UserDaoImpl implements UserDao {
         try {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM library_information.user WHERE userId='" + userId + "'");
-            while (rs.next() ){
-                User user = new User(rs.getString("userId"), rs.getString("userName"), rs.getString("department"),
+            while (rs.next()) {
+                User user = UserFactory.createUser(rs.getString("userId"), rs.getString("password"),
+                        rs.getString("userName"), rs.getString("department"),
                         rs.getString("email"), rs.getString("type"), rs.getString("permission"));
                 return user;
             }
@@ -50,10 +50,10 @@ public class UserDaoImpl implements UserDao {
             stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
 
-            while (rs.next()){
+            while (rs.next()) {
                 User user = UserFactory.createUser(rs.getString(1), rs.getString(2),
                         rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6));
+                        rs.getString(6), rs.getString(7));
                 users.add(user);
             }
         } catch (SQLException e) {
@@ -86,7 +86,7 @@ public class UserDaoImpl implements UserDao {
     public boolean createUser(User user) {
         Connection conn = daoHelper.getConnection();
         try {
-            String sql = "INSERT INTO library_information.user(userId, passwd, userName, department" +
+            String sql = "INSERT INTO library_information.user(userId, password, userName, department" +
                     ", email, type, permission) VALUES (?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = conn.prepareStatement(sql);
 
